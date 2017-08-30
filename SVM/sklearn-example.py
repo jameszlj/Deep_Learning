@@ -1,0 +1,36 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import svm
+
+# 获取40个不同数据点
+X = np.r_[np.random.randn(20, 2) - [2, 2], np.random.randn(20, 2) + [2, 2]]
+Y = [0] * 20 + [1] * 20
+
+# 导入模型
+clf = svm.SVC(kernel='linear')
+clf.fit(X, Y)
+
+# 获取超平面   w_0x + w_1y +w_3=0 can be rewritten y = -(w_0/w_1) x - (w_3/w_1)
+w = clf.coef_[0]
+a = -w[0]/w[1]
+xx = np.linspace(-5, 5)
+yy = a*xx - (clf.intercept_[0])/w[1]
+# print(yy)
+# print(clf.support_vectors_)
+
+# 通过支持向量点的平行于超平面平行面
+b = clf.support_vectors_[0]
+yy_down = a * xx + (b[1]-a*b[0])
+b = clf.support_vectors_[-1]
+yy_up = a * xx + (b[1]-a*b[0])
+
+# 可视化
+plt.plot(xx, yy, 'k-')
+plt.plot(xx, yy_down, 'k--')
+plt.plot(xx, yy_up, 'k--')
+
+plt.scatter(clf.support_vectors_[:, 0], clf.support_vectors_[:, 1], s=80, facecolor='none')
+plt.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired)
+
+plt.axis('tight')
+plt.show()
