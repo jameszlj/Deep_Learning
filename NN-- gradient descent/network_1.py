@@ -5,7 +5,7 @@ import numpy as np
 
 def sigmoid(z):
     """逻辑函数"""
-    return 1/(1+np.exp(-z))
+    return 1.0/(1.0+np.exp(-z))
 
 
 def sigmoid_deriv(z):
@@ -36,14 +36,15 @@ class Network(object):
             n_test = len(test_data)
         n = len(train_data)
         for j in range(epochs):
-            random.shuffle(train_data)  # 打乱数据集
-            mini_batchs = [train_data[k:k+mini_batch_size]
-                           for k in range(0, n, mini_batch_size)]
-            for min_batch in mini_batchs:
-                self.update_mini_batch(min_batch, eta)
+            random.shuffle(train_data)
+            mini_batches = [
+                train_data[k:k + mini_batch_size]
+                for k in range(0, n, mini_batch_size)]
+            for mini_batch in mini_batches:
+                self.update_mini_batch(mini_batch, eta)
             if test_data:
-                # format 格式化输出
-                print("Epoch {0}:{1}/{2}".format(j, self.evaluate(test_data), n_test))
+                print("Epoch {0}: {1} / {2}".format(
+                    j, self.evaluate(test_data), n_test))
             else:
                 print("Epoch {0} complete".format(j))
 
@@ -59,7 +60,7 @@ class Network(object):
         self.weights = [w-(eta/len(mini_batch))*nw
                         for w, nw in zip(self.weights, nabla_w)]
         self.biases = [b-(eta/len(mini_batch))*nb
-                       for b, nb in zip(self.biases, nabla_w)]
+                       for b, nb in zip(self.biases, nabla_b)]
 
     def backprop(self, x, y):
         """返回cost函数对w,b 的偏导数"""
@@ -70,7 +71,7 @@ class Network(object):
         activations = [x]  # list储存所有层的activation
         zs = list()  # 存储所有的z 向量
         for b, w in zip(self.biases, self.weights):
-            z = np.dot(w, activation) + b
+            z = np.dot(w, activation)+b
             zs.append(z)
             activation = sigmoid(z)
             activations.append(activation)
@@ -99,5 +100,7 @@ class Network(object):
     def cost_derivative(self, output_activations, y):
         """返回cost函数对activation 的偏导数"""
         return (output_activations-y)
+
+
 
 
