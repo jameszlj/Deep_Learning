@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Deep_Learning.iml" filepath="$PROJECT_DIR$/.idea/Deep_Learning.iml" />
+      <module fileurl="file://D:/git-learning/Tensorflow-Tutorial/.idea/Tensorflow-Tutorial.iml" filepath="D:/git-learning/Tensorflow-Tutorial/.idea/Tensorflow-Tutorial.iml" />
       <module fileurl="file://D:/git-learning/neural-networks-and-deep-learning/.idea/neural-networks-and-deep-learning.iml" filepath="D:/git-learning/neural-networks-and-deep-learning/.idea/neural-networks-and-deep-learning.iml" />
     </modules>
   </component>

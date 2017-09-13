@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="neural-networks-and-deep-learning" />
     <orderEntry type="module" module-name="neural-networks-and-deep-learning" />
+    <orderEntry type="module" module-name="Tensorflow-Tutorial" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />
